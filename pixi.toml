@@ -1,0 +1,28 @@
+[workspace]
+authors = ["David Nguyen <64271861+Omnistic@users.noreply.github.com>"]
+channels = ["conda-forge"]
+name = "smartmic_cd7_oad"
+platforms = ["win-64"]
+version = "0.1.0"
+
+[tasks]
+start = "python main.py"
+cellpose = { cmd = "cellpose", env = { KMP_DUPLICATE_LIB_OK = "TRUE" } }
+
+[dependencies]
+python = "3.11.*"
+
+[pypi-dependencies]
+cellpose = { version = ">=3.0", extras = ["gui"] }
+bioio = ">=3.2.0,<4"
+bioio-lif = ">=1.4.2,<2"
+python-dotenv = ">=1.2.2,<2"
+plotly = ">=6.6.0,<7"
+pillow = ">=10.0"
+scipy = "*"
+scikit-image="*"
+matplotlib = "*"
+numpy = "*"
+torch = { version = ">=2.0", index = "https://download.pytorch.org/whl/cu126" }
+torchvision = { version = "*", index = "https://download.pytorch.org/whl/cu126" }
+bioio-czi = ">=2.7.0, <3"
