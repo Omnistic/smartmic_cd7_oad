@@ -25,13 +25,13 @@ load_dotenv()
 overview_experiment_macro = os.getenv("overview_experiment_macro")
 detail_experiment_macro = os.getenv("detail_experiment_macro")
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.connect((os.getenv("cd_7_ip"), int(os.getenv("cd_7_port"))))
-sock.recv(4096)
-sock.sendall(f"RUN {overview_experiment_macro}\r\n".encode("ascii"))
-buf = b""
-while b"Ok" not in buf:
-    buf += sock.recv(4096)
+# sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# sock.connect((os.getenv("cd_7_ip"), int(os.getenv("cd_7_port"))))
+# sock.recv(4096)
+# sock.sendall(f"RUN {overview_experiment_macro}\r\n".encode("ascii"))
+# buf = b""
+# while b"Ok" not in buf:
+#     buf += sock.recv(4096)
 
 image_file_path = os.getenv("image_file_path")
 if not os.path.isfile(image_file_path):
@@ -129,6 +129,11 @@ for tile_region in tile_regions:
         xaxis3=dict(scaleanchor="y3", scaleratio=1),
         xaxis4=dict(scaleanchor="y4", scaleratio=1),
         xaxis5=dict(scaleanchor="y5", scaleratio=1),
+        yaxis1=dict(autorange="reversed"),
+        yaxis2=dict(autorange="reversed"),
+        yaxis3=dict(autorange="reversed"),
+        yaxis4=dict(autorange="reversed"),
+        yaxis5=dict(autorange="reversed"),
     )
     fig.write_html(f"{well_name}.html")
 
@@ -153,7 +158,7 @@ with open(output_path, "wb") as f:
     f.write(b"\xef\xbb\xbf")
     exp_tree.write(f, encoding="utf-8", xml_declaration=True)
 
-sock.sendall(f"RUN {detail_experiment_macro}\r\n".encode("ascii"))
-buf = b""
-while b"Ok" not in buf:
-    buf += sock.recv(4096)
+# sock.sendall(f"RUN {detail_experiment_macro}\r\n".encode("ascii"))
+# buf = b""
+# while b"Ok" not in buf:
+#     buf += sock.recv(4096)
